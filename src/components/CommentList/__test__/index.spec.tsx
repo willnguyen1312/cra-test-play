@@ -1,24 +1,37 @@
-import * as React from 'react'
-import { render } from 'react-testing-library'
-import CommentCard from '..'
+import * as React from "react";
+import { render } from "react-testing-library";
+import CommentList from "..";
 
-describe('Comment Card', () => {
-    it('should renders the comment and the author', () => {
+describe("Comment List", () => {
+    test("It renders a list of comment cards with their comment and author tag", () => {
 
         // Arrange
+        const comment1 = {
+            author: "The Notester",
+            comment: "I do love writing tests",
+            id: 1,
+        };
+        const comment2 = {
+            author: "Comment Hater",
+            comment: "Nothing is better than a good comment app",
+            id: 2,
+        };
         const props = {
-            author: 'Luke Ghenco',
-            comment: 'React Testing Library is great',
-        }
+            comments: [comment1, comment2]
+        };
 
         // Act
-        const { getByText } = render(<CommentCard {...props} />)
+        const { getByText } = render(<CommentList {...props} />);
 
         // Assert
-        const commentNode = getByText(props.comment)
-        const authorTagNode = getByText(`- ${props.author}`)
+        const firstCommentNode = getByText(comment1.comment);
+        const firstAuthorTagNode = getByText(`- ${comment1.author}`);
+        const secondCommentNode = getByText(comment2.comment);
+        const secondAuthorTagNode = getByText(`- ${comment2.author}`);
 
-        expect(commentNode).toBeDefined()
-        expect(authorTagNode).toBeDefined()
-    })
-})
+        expect(firstCommentNode).toBeDefined();
+        expect(firstAuthorTagNode).toBeDefined();
+        expect(secondCommentNode).toBeDefined();
+        expect(secondAuthorTagNode).toBeDefined();
+    });
+});

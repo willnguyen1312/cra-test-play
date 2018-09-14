@@ -1,34 +1,34 @@
 import * as React from "react";
+import styled from "styled-components";
 
-interface ICommentCardProps {
+const CommentCardWrapper = styled.div`
+  background-color: #f5f5f5;
+  border: 1px solid #767676;
+  border-radius: 8px;
+  font-family: Palatino;
+  font-style: italic;
+  height: 80px;
+  margin: 24px;
+  padding: 2px 24px;
+  position: relative;
+`;
+
+const AuthorTag = styled.p`
+    bottom: 0;
+    position: absolute;
+    right: 12px;
+`;
+
+interface CommentCardProps {
   comment: string;
   author: string;
 }
 
-const CommentCard = ({ comment, author }: ICommentCardProps) => (
-  <div style={styles.card as any}>
+const CommentCard = ({ comment, author }: CommentCardProps) => (
+  <CommentCardWrapper>
     <p>{comment}</p>
-    <p style={styles.authorTag as any}>- {author}</p>
-  </div>
+    <AuthorTag>- {author}</AuthorTag>
+  </CommentCardWrapper>
 );
-
-const styles = {
-  authorTag: {
-    bottom: "0",
-    position: "absolute",
-    right: "12px"
-  },
-  card: {
-    backgroundColor: "#f5f5f5",
-    border: "1px solid #767676",
-    borderRadius: "8px",
-    fontFamily: "Palatino",
-    fontStyle: "italic",
-    height: "80px",
-    margin: "24px",
-    padding: "2px 24px",
-    position: "relative"
-  }
-};
 
 export default CommentCard;

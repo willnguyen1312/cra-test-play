@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { render } from 'react-testing-library'
-import CommentCard from '../CommentCard'
+import CommentCard from '..'
 
 describe('Comment Card', () => {
     test('it renders the comment and the author', () => {

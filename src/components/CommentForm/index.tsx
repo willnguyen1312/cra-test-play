@@ -1,10 +1,14 @@
+import axios from "axios";
 import * as React from "react";
 
 export default class CommentForm extends React.Component {
-  public state = {
+  
+  public initialState = {
     author: "",
     comment: "",
   };
+  
+  public state = this.initialState;
 
   public handleOnChange = ({ target: { name, value } }: { target: { name: string, value: string } }) =>
     this.setState(_prevState => ({
@@ -21,12 +25,31 @@ export default class CommentForm extends React.Component {
     return true;
   }
 
+  public handleOnSubmit = event => {
+    event.preventDefault();
+    const newComment = this.state;
+
+    this.createComment(newComment);
+  }
+
+  public createComment = newComment => {
+    axios.post("/api/comments", { newComment })
+      .then(comment => {
+        this.props.addComment(comment);
+        this.clearForm();
+      })
+      .catch(console.error);
+  }
+
+  public clearForm = () =>
+    this.setState(_prevState => (this.initialState))
+
   public render() {
     const { comment, author } = this.state;
     const isDisabled = this.hasInvalidFields() ? true : false;
 
     return (
-      <form style={styles.form}>
+      <form onSubmit={this.handleOnSubmit} style={styles.form}>
         <div>
           <textarea
             style={styles.commentBox}

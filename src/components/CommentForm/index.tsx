@@ -1,7 +1,8 @@
 import axios from "axios";
 import * as React from "react";
 
-export default class CommentForm extends React.Component {
+// tslint:disable-next-line:no-any
+export default class CommentForm extends React.Component<any, any> {
   
   public initialState = {
     author: "",
@@ -11,7 +12,8 @@ export default class CommentForm extends React.Component {
   public state = this.initialState;
 
   public handleOnChange = ({ target: { name, value } }: { target: { name: string, value: string } }) =>
-    this.setState(_prevState => ({
+    // tslint:disable-next-line:no-any
+    this.setState((_prevState: any) => ({
       [name]: value
     }))
 
@@ -25,24 +27,29 @@ export default class CommentForm extends React.Component {
     return true;
   }
 
-  public handleOnSubmit = event => {
+  // tslint:disable-next-line:no-any
+  public handleOnSubmit = (event: any) => {
     event.preventDefault();
     const newComment = this.state;
 
     this.createComment(newComment);
   }
 
-  public createComment = newComment => {
+  // tslint:disable-next-line:no-any
+  public createComment = (newComment: any) => {
     axios.post("/api/comments", { newComment })
-      .then(comment => {
-        this.props.addComment(comment);
+      .then(data => {
+        const {data: {newComments}} = data;
+        this.props.addComment(newComments);
         this.clearForm();
       })
+      // tslint:disable-next-line:no-console
       .catch(console.error);
   }
 
   public clearForm = () =>
-    this.setState(_prevState => (this.initialState))
+    // tslint:disable-next-line:no-any
+    this.setState((_prevState: any) => (this.initialState))
 
   public render() {
     const { comment, author } = this.state;

@@ -60,8 +60,8 @@ describe("Comments Screen", () => {
     
         await wait(() => getByText(`- ${newComment.author}`));
     
-        expect(commentTextfieldNode.value).toEqual("");
-        expect(nameFieldNode.value).toEqual("");
+        expect((commentTextfieldNode as HTMLInputElement).value).toEqual("");
+        expect((commentTextfieldNode as HTMLInputElement).value).toEqual("");
     });
     
 });

@@ -8,4 +8,7 @@ ReactDOM.render(
   <App />,
   document.getElementById("root") as HTMLElement
 );
+
+// tslint:disable-next-line:no-any
+(module as any).hot.accept();
 registerServiceWorker();

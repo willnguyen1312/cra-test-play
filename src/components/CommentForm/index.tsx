@@ -96,6 +96,7 @@ const styles = {
     width: "500px",
   },
   commentBox: {
+    fontSize: "20px",
     height: "80px",
     marginBottom: "12px",
     width: "494px",
@@ -107,6 +108,7 @@ const styles = {
   },
   inputField: {
     float: "right",
+    fontSize: "18px",
     width: "360px",
   },
 };
